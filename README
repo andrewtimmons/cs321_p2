@@ -1,0 +1,86 @@
+******************
+* Lab 02 - MaxHeap/CPUScheduling
+* CS321
+* 07/10/2021
+* Andrew Timmons
+******************
+
+OVERVIEW:
+ 
+ The CPUScheduling program simulates a CPU's processing schedule using a process
+ queue (PQueue) arranged in a max heap structure.
+ 
+ 
+INCLUDED FILES:
+
+ CPUScheduling.java - driver class (instructor provided)
+ Averager.java - source file (instructor provided)
+ MaxHeap.java - source file
+ Process.java - source file
+ PQueue.java - source file
+ ProcessGenerator - source file
+ README - this file
+ 
+COMPILING AND RUNNING:
+
+ To compile, execute the following command in the main project directory:
+ ```
+ $ javac CPUScheduling.java
+ ```
+ 
+ The usage for running the program is as follows:
+ ```
+ java CPUScheduling <maxProcessTime> <maxPriorityLevel> <timeToIncrementPriority>
+ <simulationTime> <processArrivalRate>
+ ```
+
+ The program runs without any further user input. The results are printed to
+ the console.
+ 
+ 
+PROGRAM DESIGN AND IMPORTANT CONCEPTS:
+
+ CPUScheduling simulates a CPU's processing schedule. In regular time intervals, the 
+ program extracts the highest priority process from the PQueue, processes it, then
+ places it back in the queue (assuming the process is not finished). The ProcessGenerator
+ is used to randomly generate Processes at regular intervals and place them in the
+ PQueue. In order to prevent starvation, Processes in the PQueue have their priority 
+ levels increased regularly if they are not being processed. Processes in the PQueue 
+ are stored in an ArrayList in a max heap structure, ensuring that highest priority
+ Processes are in the front of the list.
+ 
+ 
+ANALYSIS:
+ 
+ I chose to use an ArrayList rather than an array for the MaxHeap class so that the 
+ class could be written to store generic items. My first implementation using an array
+ ran into trouble when I needed to expand or shrink the array. Apparently, you cannot
+ create an array of generic objects. I tried creating an array of Objects and then
+ casting the array as generic objects, but I still ran into issues (assumedly because
+ not all objects are Comparable). Casting an array of Comparables to a generic type 
+ didn't work either; at that point, I decided to use an ArrayList instead.  
+ 
+ 
+TESTING:
+
+ To make sure the MaxHeap class was working correctly, I created a unit tester (not 
+ provided) to test the constructor and various other methods and make sure the max heap 
+ structure was always maintained. I was able to confirm that the MaxHeap class was 
+ working correctly by comparing the contents of the MaxHeap's ArrayList to the expected
+ contents for MaxHeaps of various sizes.
+ 
+ Additionally, the instructor provided a script for comparing the output of my CPUScheduling 
+ program to the correct output from his program, printing any differences in outputs to the 
+ console. At the time of writing this, the test does not print anything to the console,
+ meaning my program's output matches his. Because of this, I am concluding that my program
+ is working correctly.
+
+
+DISCUSSION:
+
+ MaxHeap was definitelly the most difficult class to create for this project, but utilizing a
+ unit tester made short work of it. I think that I am still not 100% comfortable using
+ recursive function calls in general, but using it for MaxHeapifyUp and MaxHeapifyDown made
+ perfect sense to me, so perhaps I am getting better at it. Once MaxHeap was working properly,
+ the rest of the project came together easily, and the instructor's provided testing method
+ confirmed my program's functionality on the first try (thankfully).
